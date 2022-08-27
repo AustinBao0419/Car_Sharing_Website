@@ -17,6 +17,7 @@ if($count == 1){
     $row = mysqli_fetch_array($result, MYSQL_ASSOC); 
     $username = $row['username'];
     $email = $row['email']; 
+    $picture = $row['profilepicture'];
 }else{
     echo "There was an error retrieving the username and email from the database";   
 }
@@ -60,6 +61,28 @@ if($count == 1){
           tr{
              cursor: pointer;    
           }
+          #previewing{
+              max-width: 100%;
+              height: auto;
+              border-radius: 50%;
+          }
+          .previewing2{
+              margin: auto;
+              height: 20px;
+              border-radius: 50%;
+          }
+          #spinner{
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              height: 85px;
+              text-align: center;
+              margin: auto;
+              z-index: 1100;
+          }
       </style>
   </head>
   <body>
@@ -70,7 +93,7 @@ if($count == 1){
             
               <div class="navbar-header">
               
-                  <a class="navbar-brand">Online Notes</a>
+                  <a class="navbar-brand">Car Sharing</a>
                   <button type="button" class="navbar-toggle" data-target="#navbarCollapse" data-toggle="collapse">
                       <span class="sr-only">Toggle navigation</span>
                       <span class="icon-bar"></span>
@@ -81,13 +104,25 @@ if($count == 1){
               </div>
               <div class="navbar-collapse collapse" id="navbarCollapse">
                   <ul class="nav navbar-nav">
+                    <li><a href="index.php">Search</a></li>  
                     <li class="active"><a href="#">Profile</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="#">Contact us</a></li>
-                      <li><a href="mainpageloggedin.php">My Notes</a></li>
+                      <li><a href="mainpageloggedin.php">My Trips</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                      <li><a href="#">Logged in as <b><?php echo $username; ?></b></a></li>
+                      <li><a href="#">
+                            <?php
+                                if(empty($picture)){
+                                    echo "<div class='image_preview'  data-target='#updatepicture' data-toggle='modal'><img class='previewing2' src='profilepicture/noimage.jpg' /></div>";
+                                }else{
+                                    echo "<div class='image_preview' data-target='#updatepicture' data-toggle='modal'><img class='previewing2' src='$picture' /></div>";
+                                }
+
+                              ?>
+                          </a>
+                      </li>
+                      <li><a href="#"><b><?php echo $username; ?></b></a></li>
                     <li><a href="index.php?logout=1">Log out</a></li>
                   </ul>
               
@@ -239,11 +274,62 @@ if($count == 1){
       </div>
       </div>
       </form>
+      
+      <!--Update picture-->    
+      <form method="post" enctype="multipart/form-data" id="updatepictureform">
+        <div class="modal" id="updatepicture" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                  <h4 id="myModalLabel">
+                    Upload Picture:
+                  </h4>
+              </div>
+              <div class="modal-body">
+                  
+                  <!--Update picture message from PHP file-->
+                  <div id="updatepicturemessage"></div>
+                  <?php
+                    if(empty($picture)){
+                        echo "<div class='image_preview'><img id='previewing' src='profilepicture/noimage.jpg' /></div>";
+                    }else{
+                        echo "<div class='image_preview'><img id='previewing' src='$picture' /></div>";
+                    }
+    
+                  ?>
+                  <div class="form-inline">
+                      <div class="form-group">
+                        <label for="picture">Select a picture:</label>
+                        <input type="file" name="picture" id="picture">
+                      </div>
+                </div>
+
+                  
+                  
+              </div>
+              <div class="modal-footer">
+                  <input class="btn green" name="updatepicture" type="submit" value="Submit">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                  Cancel
+                </button> 
+              </div>
+          </div>
+      </div>
+      </div>
+      </form>
     <!-- Footer-->
       <div class="footer">
           <div class="container">
               <p>DevelopmentIsland.com Copyright &copy; 2015-<?php $today = date("Y"); echo $today?>.</p>
           </div>
+      </div>
+      <!--Spinner-->
+      <div id="spinner">
+         <img src='ajax-loader.gif' width="64" height="64" />
+         <br>Loading..
       </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
