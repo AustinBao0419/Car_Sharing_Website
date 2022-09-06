@@ -61,7 +61,7 @@ if(!$result){
             //Send email with link to resetpassword.php with user id and activation code
 
 $message = "Please click on this link to reset your password:\n\n";
-$message .= "http://mynotes.thecompletewebhosting.com/resetpassword.php?user_id=$user_id&key=$key";
+$message .= "http://carsharingwebsitefinal.thecompletewebhosting.com/resetpassword.php?user_id=$user_id&key=$key";
 if(mail($email, 'Reset your password', $message, 'From:'.'developmentisland@gmail.com')){
         //If email sent successfully
                 //print success message

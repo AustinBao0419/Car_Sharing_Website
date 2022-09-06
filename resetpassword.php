@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!--This file receives the user_id and key generated to create the new password-->
 <!--This file displays a form to input new password-->
 
@@ -115,3 +116,4 @@ echo "
             </script>
         </body>
 </html>
+<?php ob_flush(); ?>
