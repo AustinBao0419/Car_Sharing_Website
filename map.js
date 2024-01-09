@@ -25,6 +25,7 @@ var directionsService = new google.maps.DirectionsService();
 
 //onload:
 google.maps.event.addDomListener(window, 'load', initialize);
+//window.addEventListener('load', initialize);
 
 //initialize: draw map in the #googleMap div
 function initialize() {

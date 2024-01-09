@@ -39,7 +39,7 @@ if($count == 1){
       <link href="styling.css" rel="stylesheet">
       <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBQNfV0OspV9h-ZUoX30bj-6jvFf5Tn2as"></script>-->
-      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBQNfV0OspV9h-ZUoX30bj-6jvFf5Tn2as"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx8CzW7FGOrko_C1GKGv66BUyWOLFLFAU"></script>
       <style>
         #container{
             margin-top:120px;   
